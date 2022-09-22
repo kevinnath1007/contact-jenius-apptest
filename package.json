@@ -22,7 +22,6 @@
     "react-native-snackbar": "^2.4.0",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
-    "redux-saga": "^1.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
