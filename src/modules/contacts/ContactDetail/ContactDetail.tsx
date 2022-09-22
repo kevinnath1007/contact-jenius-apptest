@@ -49,7 +49,6 @@ const ContactDetail: React.FC<NavigationContactDetailProps> = ({
   }, [contactDetail]);
 
   React.useEffect(() => {
-    console.log(deleteResult);
     if (deleteResult.isSuccess) {
       Snackbar.show({
         text: 'Data deleted',
@@ -150,7 +149,6 @@ const ContactDetail: React.FC<NavigationContactDetailProps> = ({
               onChangeText={value => {
                 const intAge = value === '' ? 0 : parseInt(value);
                 if (intAge <= 100) {
-                  console.log(value, 'dude');
                   setAge(intAge);
                   setErrorAge('');
                 } else {

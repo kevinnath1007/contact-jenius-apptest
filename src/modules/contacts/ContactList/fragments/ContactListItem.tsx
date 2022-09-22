@@ -16,7 +16,6 @@ const ContactListItem = ({
   const {navigate} = useNavigation<RootStackNavigateType>();
 
   const onPress = () => {
-    console.log(id, 'contact');
     navigate('ContactDetail', {id});
   };
 
