@@ -20,7 +20,11 @@ const ContactListItem = ({
   };
 
   return (
-    <TouchableOpacity key={id} onPress={onPress} style={styles.container}>
+    <TouchableOpacity
+      testID={`contactList-${id}`}
+      key={id}
+      onPress={onPress}
+      style={styles.container}>
       <Image
         source={
           photo !== 'N/A'

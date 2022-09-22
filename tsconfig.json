@@ -5,6 +5,22 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Completeness */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": [
+      "es2019"
+    ],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "strict": true,
+    "target": "esnext",
+    "baseUrl": ".",
+    "sourceMap": true,
+    "inlineSources": true,
+    "sourceRoot": "/"
   }
 }

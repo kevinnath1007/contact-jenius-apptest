@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContactList snapshot: component match 1`] = `
+<RCTSafeAreaView
+  style={
+    Object {
+      "backgroundColor": "white",
+      "flex": 1,
+      "paddingHorizontal": 16,
+      "paddingVertical": 16,
+    }
+  }
+>
+  <RCTScrollView
+    getItem={[Function]}
+    getItemCount={[Function]}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onEndReached={[Function]}
+    onEndReachedThreshold={0.5}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onRefresh={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    refreshControl={
+      <RefreshControlMock
+        onRefresh={[Function]}
+        refreshing={true}
+      />
+    }
+    refreshing={true}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <RCTRefreshControl />
+    <View />
+  </RCTScrollView>
+</RCTSafeAreaView>
+`;

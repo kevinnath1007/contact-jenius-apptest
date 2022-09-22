@@ -23,6 +23,7 @@ module.exports = {
     '!./coverage/**',
     '!<rootDir>/*',
     '!**/__snapshots__/**',
+    '!<rootDir>/src/app.tsx',
   ],
   maxWorkers: 1,
   coverageThreshold: {

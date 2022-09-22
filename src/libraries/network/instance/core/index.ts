@@ -38,12 +38,14 @@ export const axiosBaseQuery =
     try {
       const result = await core({url, method, data, params});
 
+      // @ts-ignore
       if (result.ok) {
         return {data: result.data};
       } else {
         return {
           error: {
             status: result.status,
+            // @ts-ignore
             data: result.message,
           },
         };
