@@ -1,35 +1,76 @@
 import React from 'react';
-import {View, FlatList, Text} from 'react-native';
+import {FlatList, SafeAreaView, StyleSheet, Text} from 'react-native';
 
 import ContactListItem from './fragments/ContactListItem';
-import {ContactListType} from './contactList.api';
-import {getContactList} from './contactList.action';
-import {useSelector} from 'react-redux';
-import useAppDispatch from '../../../hooks/useAppDispatch';
+import {useGetContactListQuery, ContactListType} from './contactList.api';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParams} from '../../../navigation/screen';
 
-const ContactList: React.FC = () => {
-  const contactListData = useSelector(state => state.contactList.value);
-  const dispatch = useAppDispatch();
+type NavigationContactListProps = NativeStackScreenProps<
+  RootStackParams,
+  'ContactList'
+>;
 
-  React.useEffect(() => {
-    dispatch(getContactList());
-  }, []);
-  const renderItem = ({firstName, lastName, photo}: ContactListType) => {
+const ContactList: React.FC<NavigationContactListProps> = ({navigation}) => {
+  const {data, isFetching, refetch} = useGetContactListQuery({});
+
+  const onPressAddContact = React.useCallback(() => {
+    navigation.navigate('ContactAdd');
+  }, [navigation]);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Text style={styles.addText} onPress={onPressAddContact}>
+          Add
+        </Text>
+      ),
+    });
+  }, [navigation]);
+
+  const renderItem = ({item}: {item: ContactListType}) => {
     return (
       <ContactListItem
-        firstName={firstName}
-        lastName={lastName}
-        photo={photo}
+        key={item.id}
+        id={item.id}
+        firstName={item?.firstName}
+        lastName={item?.lastName}
+        photo={item?.photo}
       />
     );
   };
 
+  const onEndReached = () => {
+    //@todo: if there is pagination system happening in this list
+  };
+
+  const keyExtractor = (item: ContactListType) => item.id;
+
   return (
-    <View>
-      <Text>test</Text>
-      <FlatList data={[]} renderItem={renderItem} />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        keyExtractor={keyExtractor}
+        data={data}
+        refreshing={isFetching}
+        onRefresh={refetch}
+        renderItem={renderItem}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.5}
+      />
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    backgroundColor: 'white',
+    flex: 1,
+  },
+  addText: {
+    color: '#87A2FB',
+  },
+});
 
 export default ContactList;

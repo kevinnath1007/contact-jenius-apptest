@@ -2,6 +2,7 @@ import {createApi} from '@reduxjs/toolkit/query/react';
 import {axiosBaseQuery} from './instance/core';
 
 export const api = createApi({
+  reducerPath: 'contactApi',
   baseQuery: axiosBaseQuery(),
   endpoints(build) {
     return {
@@ -17,7 +18,7 @@ export const api = createApi({
       updateContact: build.mutation({
         query: data => ({
           url: `/contact/${data.id}`,
-          method: 'post',
+          method: 'put',
           data: {
             firstName: data.firstName,
             lastName: data.lastName,
@@ -25,6 +26,9 @@ export const api = createApi({
             photo: data.photo,
           },
         }),
+      }),
+      deleteContact: build.mutation({
+        query: id => ({url: `/contact/${id}`, method: 'delete'}),
       }),
     };
   },

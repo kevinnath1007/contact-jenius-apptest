@@ -8,4 +8,4 @@ export type ContactListType = {
   photo: string;
 };
 
-export const {useGetContactListQuery} = api;
+export const {usePostContactMutation} = api;

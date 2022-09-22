@@ -37,7 +37,17 @@ export const axiosBaseQuery =
   async ({url, method, data, params}) => {
     try {
       const result = await core({url, method, data, params});
-      return {data: result.data};
+
+      if (result.ok) {
+        return {data: result.data};
+      } else {
+        return {
+          error: {
+            status: result.status,
+            data: result.message,
+          },
+        };
+      }
     } catch (axiosError) {
       let err = axiosError as AxiosError;
       return {

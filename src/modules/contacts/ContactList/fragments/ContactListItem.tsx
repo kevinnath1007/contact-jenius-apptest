@@ -1,22 +1,57 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Image from 'react-native-fast-image';
 import {ContactListType} from '../contactList.api';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParams} from '../../../../navigation/screen';
+
+type RootStackNavigateType = NavigationProp<RootStackParams>;
 
 const ContactListItem = ({
+  id,
   firstName,
   lastName,
   photo,
-}: Omit<ContactListType, 'id' | 'age'>) => {
+}: Omit<ContactListType, 'age'>) => {
+  const {navigate} = useNavigation<RootStackNavigateType>();
+
+  const onPress = () => {
+    console.log(id, 'contact');
+    navigate('ContactDetail', {id});
+  };
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity key={id} onPress={onPress} style={styles.container}>
       <Image
-        source={{uri: photo}}
-        style={{width: 16, height: 16, borderRadius: 16}}
+        source={
+          photo !== 'N/A'
+            ? {uri: photo}
+            : require('../../../../../assets/icons/img_162044.png')
+        }
+        style={styles.imageProfile}
       />
-      <Text>{`${firstName} ${lastName}`}</Text>
+      <Text style={styles.nameText}>{`${firstName} ${lastName}`}</Text>
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    paddingHorizontal: 4,
+    paddingVertical: 4,
+    alignItems: 'center',
+  },
+  nameText: {
+    fontSize: 24,
+    marginHorizontal: 8,
+  },
+  imageProfile: {
+    width: 36,
+    height: 36,
+    borderRadius: 16,
+    marginHorizontal: 8,
+  },
+});
 
 export default React.memo(ContactListItem);
